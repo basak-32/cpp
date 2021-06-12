@@ -1,0 +1,1 @@
+{"name":"Local: makeMatrixIdentical","url":"c:\\Users\\user\\Desktop\\C++\\Pre placement test 1\\makeMatrixIdentical.cpp","tests":[{"id":1622909863551,"input":"2 2\n1 1\n2 3\n1 1\n2 3","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"c:\\Users\\user\\Desktop\\C++\\Pre placement test 1\\makeMatrixIdentical.cpp","group":"local","local":true}
