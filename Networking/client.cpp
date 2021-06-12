@@ -1,18 +1,11 @@
 #include<iostream>
 #include<winsock2.h>
 #include<unistd.h>
-#include<string.h>
 
 using namespace std;
 
 struct sockaddr_in srv;
 
-#define DEFAULT_BUFLEN 512
-
-int recvbuflen = DEFAULT_BUFLEN;
-
-const char *sendbuf = "this is a test from client side";
-char recvbuf[DEFAULT_BUFLEN];
 
 int main(int argc, char const *argv[]) {
   // Initializing the WSA variables -->
@@ -54,25 +47,44 @@ int main(int argc, char const *argv[]) {
     // }
   }
 
+  while (1) {  
+    // Send -->
+
+    // const char *sendbuf = "Hello, I'm Client";
+    char recvbuf[512]{};
+    char sendbuf[512]{};
+
+    cout << "Write message: ";
+    cin.getline(sendbuf, 512);
+
+    int result = send(socketId, sendbuf, (int) strlen(sendbuf), 0);
+
+    cout << "Bytes send: " << result << endl;
+
+    
+    // Receive -->
+    result = recv(socketId, recvbuf, 512, 0);
+    if (result > 0) {
+      cout << "Bytes received: " << result << endl;
+
+      if (recvbuf[0] == '0')
+        break;
+
+      cout << "From Server: ";
+      int i = 0;
+      while (recvbuf[i] != '\0')
+        cout << recvbuf[i++];
+      cout << endl;
+    }
+    else if (result == 0)
+      cout << "Connection closed" << endl;
+    else
+      cout << "Received failed!" << endl;
+
+  }
   
-  // Send -->
-  int result = send(socketId, sendbuf, (int) strlen(sendbuf), 0);
 
-  cout << "Bytes send: " << result << endl;
-
-
-
-  // Receive -->
-  result = recv(socketId, recvbuf, recvbuflen, 0);
-  if (result > 0)
-    cout << "Bytes received: " << result << endl;
-  else if (result == 0)
-    cout << "Connection closed" << endl;
-  else
-    cout << "Received failed!" << endl;
-
-
-  
+  close(socketId);
 
   return 0;
 }

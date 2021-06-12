@@ -8,9 +8,9 @@ using namespace std;
 
 struct sockaddr_in serverAddress, clientAddress;
 
-#define DEFAULT_BUFLEN 512
 
 int main(int argc, char const *argv[]) {
+
   // Initializing the WSA variables -->
   WSADATA ws;
   if (WSAStartup(MAKEWORD(2, 2), &ws) < 0) {
@@ -19,6 +19,7 @@ int main(int argc, char const *argv[]) {
   } else
     cout << "WSA initialized successfully" << endl;
   
+
 
   // Initializing socket -->
   int socketVariable = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
@@ -29,12 +30,14 @@ int main(int argc, char const *argv[]) {
     cout << "The Socket opened successfully" << endl;
 
 
+
   // Initializing the environment for socaddr structure -->
   serverAddress.sin_family = AF_INET;
   serverAddress.sin_port = htons(9000);
   // serverAddress.sin_addr.s_addr = inet_addr("127.0.0.1");
   serverAddress.sin_addr.s_addr = INADDR_ANY;
   memset(&(serverAddress.sin_zero), 0, 8);
+
 
 
   // Binding the Socket to address -->
@@ -48,6 +51,7 @@ int main(int argc, char const *argv[]) {
     cout << "Socket binding to address done" << endl;
 
 
+
   // Listening to the requests -->
   int listenVariable = 0;
   listenVariable = listen(socketVariable, 10);
@@ -57,6 +61,7 @@ int main(int argc, char const *argv[]) {
     return 1;
   } else
     cout << "Started listening to clients" << endl;
+
 
 
   // Accept request from client -->
@@ -74,37 +79,35 @@ int main(int argc, char const *argv[]) {
   }
 
 
-  // // Send -->
-  // int result = send(newSocketVariable, "Hello, world!\n", 13, 0);
-  // cout << "Bytes sent: " << result << endl;
 
+  while (1) {
+    // Send and Receive -->
+    int result;
+    char recvbuf[512]{};
+    
+    // memset(&recvbuf, 0, 512);
 
-  // // Read -->
-  // char buffer[256];
-  // memset(&buffer, 0, 256);
+    result = recv(newSocketVariable, recvbuf, 512, 0);
+    if (result > 0)
+      cout << "Bytes received: " << result << endl;
 
-  // result = read(newSocketVariable, &buffer, 255);
-  // cout << "Bytes received: " << result << endl;
+    if (recvbuf[0] == '0') {
+      break;
+    }
 
+    cout << "From Client: ";
+    int i = 0;
+    while (recvbuf[i] != '\0')
+      cout << recvbuf[i++];
+    cout << endl;
+    
+    char sendbuf[512]{};
+    cout << "Write your message: ";
+    cin.getline(sendbuf, 512);
 
-  //   cout << "Here is the message from socket: " << buffer << endl;
-
-
-  int result;
-  char recvbuf[DEFAULT_BUFLEN];
-  int recvbuflen = DEFAULT_BUFLEN;
-  memset(&recvbuf, 0, recvbuflen);
-
-  result = recv(newSocketVariable, recvbuf, recvbuflen, 0);
-  if (result > 0)
-    cout << "Bytes received: " << result << endl;
-
-  int i = 0;
-  while (recvbuf[i] != '\0')
-    cout << recvbuf[i++];
-
-  int result2 = send(newSocketVariable, recvbuf, result, 0);
-  cout << "Bytes sent: " << result2 << endl;
+    int result2 = send(newSocketVariable, sendbuf, (int) strlen(sendbuf), 0);
+    cout << "Bytes sent: " << result2 << endl;
+  }
 
 
 
