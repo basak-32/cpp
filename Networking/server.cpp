@@ -107,6 +107,8 @@ int main(int argc, char const *argv[]) {
 
     int result2 = send(newSocketVariable, sendbuf, (int) strlen(sendbuf), 0);
     cout << "Bytes sent: " << result2 << endl;
+    if (sendbuf[0] == '0')
+      break;
   }
 
 

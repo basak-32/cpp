@@ -61,6 +61,9 @@ int main(int argc, char const *argv[]) {
 
     cout << "Bytes send: " << result << endl;
 
+    if (sendbuf[0] == '0')
+      break;
+
     
     // Receive -->
     result = recv(socketId, recvbuf, 512, 0);
