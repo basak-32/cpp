@@ -22,8 +22,8 @@ int main(int argc, char const *argv[]) {
 
 
   // Initializing socket -->
-  int socketVariable = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
-  if (socketVariable < 0) {
+  int socketId = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
+  if (socketId < 0) {
     cout << "The Socket not opened!" << endl;
     return 1;
   } else
@@ -41,10 +41,10 @@ int main(int argc, char const *argv[]) {
 
 
   // Binding the Socket to address -->
-  int bindVariable = 0;
-  bindVariable = bind(socketVariable, (sockaddr*)&serverAddress, sizeof(sockaddr));
+  int bindId = 0;
+  bindId = bind(socketId, (sockaddr*)&serverAddress, sizeof(sockaddr));
 
-  if (bindVariable < 0) {
+  if (bindId < 0) {
     cout << "Socket binding to address failed!" << endl;
     return 1;
   } else
@@ -53,10 +53,10 @@ int main(int argc, char const *argv[]) {
 
 
   // Listening to the requests -->
-  int listenVariable = 0;
-  listenVariable = listen(socketVariable, 10);
+  int listenId = 0;
+  listenId = listen(socketId, 10);
 
-  if (listenVariable < 0) {
+  if (listenId < 0) {
     cout << "Listening to clients Failed!" << endl;
     return 1;
   } else
@@ -68,10 +68,10 @@ int main(int argc, char const *argv[]) {
   struct sockaddr_storage client_address;    
   socklen_t client_len = sizeof(client_address);
 
-  int newSocketVariable = 0;
-  newSocketVariable = accept(socketVariable, (struct sockaddr*)&clientAddress, &client_len);
+  int newSocketId = 0;
+  newSocketId = accept(socketId, (struct sockaddr*)&clientAddress, &client_len);
 
-  if (newSocketVariable < 0) {
+  if (newSocketId < 0) {
     cout << "Error accepting request" << endl;
     return 1;
   } else {
@@ -87,7 +87,9 @@ int main(int argc, char const *argv[]) {
     
     // memset(&recvbuf, 0, 512);
 
-    result = recv(newSocketVariable, recvbuf, 512, 0);
+    cout << "(Enter 0 to end the connection)" << endl;
+
+    result = recv(newSocketId, recvbuf, 512, 0);
     if (result > 0)
       cout << "Bytes received: " << result << endl;
 
@@ -105,7 +107,7 @@ int main(int argc, char const *argv[]) {
     cout << "Write your message: ";
     cin.getline(sendbuf, 512);
 
-    int result2 = send(newSocketVariable, sendbuf, (int) strlen(sendbuf), 0);
+    int result2 = send(newSocketId, sendbuf, (int) strlen(sendbuf), 0);
     cout << "Bytes sent: " << result2 << endl;
     if (sendbuf[0] == '0')
       break;
@@ -113,8 +115,8 @@ int main(int argc, char const *argv[]) {
 
 
 
-  close(newSocketVariable);
-  close(socketVariable);
+  close(newSocketId);
+  close(socketId);
 
   return 0;
 }

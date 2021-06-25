@@ -42,9 +42,6 @@ int main(int argc, char const *argv[]) {
     return 1;
   } else {
     cout << "Connected to the server" << endl;
-    // while(1) {
-
-    // }
   }
 
   while (1) {  
@@ -53,6 +50,8 @@ int main(int argc, char const *argv[]) {
     // const char *sendbuf = "Hello, I'm Client";
     char recvbuf[512]{};
     char sendbuf[512]{};
+
+    cout << "(Enter 0 to end the connection)" << endl;
 
     cout << "Write message: ";
     cin.getline(sendbuf, 512);
