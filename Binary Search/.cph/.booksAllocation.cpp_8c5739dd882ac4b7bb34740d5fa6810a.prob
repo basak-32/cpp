@@ -1,0 +1,1 @@
+{"name":"Local: booksAllocation","url":"d:\\cpp\\Binary Search\\booksAllocation.cpp","tests":[{"id":1625588968244,"input":"3 2\n10 5 20","output":"20"},{"id":1625588979224,"input":"4 2\n12 34 67 90","output":"113"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\cpp\\Binary Search\\booksAllocation.cpp","group":"local","local":true}

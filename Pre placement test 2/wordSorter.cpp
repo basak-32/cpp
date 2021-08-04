@@ -10,7 +10,7 @@ int countVal (string s) {
     return ans;
 }
 
-int main() {
+int main () {
     string s;
     getline(cin, s);
     
