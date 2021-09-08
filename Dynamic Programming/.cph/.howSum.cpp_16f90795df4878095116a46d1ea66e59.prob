@@ -1,0 +1,1 @@
+{"name":"Local: howSum","url":"d:\\cpp\\Dynamic Programming\\howSum.cpp","tests":[{"id":1629393833539,"input":"4\n4 3 5 7\n7","output":"4 3\n3 4\n7"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\cpp\\Dynamic Programming\\howSum.cpp","group":"local","local":true}
