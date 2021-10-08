@@ -1,0 +1,1 @@
+{"name":"Local: kDistinctChars","url":"d:\\Amazon OA 2021\\kDistinctChars.cpp","tests":[{"id":1633510454836,"input":"pqpqs\n2","output":"7"},{"id":1633510514606,"input":"aabab\n3","output":"0"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\Amazon OA 2021\\kDistinctChars.cpp","group":"local","local":true}

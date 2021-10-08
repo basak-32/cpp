@@ -1,0 +1,1 @@
+{"name":"Local: turnstile","url":"d:\\Amazon OA 2021\\turnstile.cpp","tests":[{"id":1633508601529,"input":"4\n0 0 1 5\n0 1 1 0","output":"2 0 1 5"},{"id":1633508623735,"input":"5\n0 1 1 3 3\n0 1 0 0 1","output":"0 2 1 4 3"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\Amazon OA 2021\\turnstile.cpp","group":"local","local":true}
